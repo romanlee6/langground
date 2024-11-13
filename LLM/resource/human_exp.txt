@@ -1,0 +1,37 @@
+This text game defines a simulation environment for a predator-prey game.
+This environment is a grid where predator and prey agents interact.
+The goal for predators is to catch the prey by reaching the same location as the prey.
+
+### Observation Space
+
+The observation space for each predator is defined by its immediate surroundings, specifically a square area around it determined by the `vision` parameter.
+This means that a predator can only observe objects (other predators or prey) within this area.
+This setup allows agents to have a localized view of the environment, simulating limited perception.
+
+
+### Action Space
+
+The action space for the predators is discrete.
+Predators can move in four directions (up, right, down, left) and optionally stay in place if the `stay` action is enabled.
+Prey can not move.
+
+### Communication
+
+Predators might send communication messages to each other to share information and coordinate searching.
+
+### Reward
+
+The reward structure is designed to encourage certain behaviors in the agents.
+Predators receive a small negative reward (-0.05) at each timestep to encourage them to catch the prey quickly.
+If a predator successfully reaches the prey location, it receives a positive reward.
+The exact reward depends on the mode of the game (cooperative, competitive, mixed, or parent-child), which affects how rewards are distributed among multiple predators.
+For example, in cooperative mode, all predators on a prey receive the same reward, while in competitive mode, the reward is divided among the predators on the prey.
+
+### Environment Dynamics
+
+The environment simulates the movement of agents based on their actions and updates their positions on the grid.
+It checks for conditions like reaching the prey or going out of bounds and updates the game state accordingly.
+The episode ends when all predators reach the prey location.
+
+In summary, this environment is a simulation of a predator-prey game where agents must learn to navigate a grid to achieve their objectives, using only their local perception of the environment.
+The learning process is driven by the rewards received for their actions, encouraging the development of strategies for catching the prey.

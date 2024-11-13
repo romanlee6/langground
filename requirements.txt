@@ -1,0 +1,4 @@
+numpy
+torch
+Pillow
+gym==0.21.0

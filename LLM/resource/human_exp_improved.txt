@@ -1,0 +1,37 @@
+This text game defines a simulation environment for a predator-prey game.
+This environment is a grid where predator and prey agents interact.
+The goal for predators is to catch the prey by reaching the same location as the prey.
+
+### Observation Space
+
+The observation space for each predator is defined by its immediate surroundings, specifically a square area around it determined by the `vision` parameter.
+This means that a predator can only observe objects (other predators or prey) within this area.
+
+
+### Action Space
+
+The action space for the predators is discrete.
+Predators can move in four directions (up, right, down, left) and optionally stay in place if the `stay` action is enabled.
+Prey can not move and remain in its original location all the time.
+
+### Communication
+
+Predators might send communication messages to each other to share information and coordinate searching.
+
+### Goal
+
+The goal of task is for all the predators to reach the exact prey location as soon as possible.
+
+### Environment Dynamics
+
+The environment simulates the movement of agents based on their actions and updates their positions on the grid.
+The agent location is described as two coordinates [x, y], in which x indicates the axis from north to south and y indicates the axis from west to east.
+When agent move 1-step up, the value of x coordinate decrease by 1.
+When agent move 1-step down, the value of x coordinate increase by 1.
+When agent move 1-step left, the value of y coordinate decrease by 1.
+When agent move 1-step right, the value of y coordinate increase by 1.
+It checks for conditions like reaching the prey or going out of bounds and updates the game state accordingly.
+The episode ends when all predators reach the prey location.
+
+
+In summary, this environment is a simulation of a predator-prey game where agents must coordinate to search for the prey using only their local perception of the environment.

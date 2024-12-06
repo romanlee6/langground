@@ -10,20 +10,26 @@ pip install setuptools==65.5.0 "wheel<0.40.0"
 cd gym-dragon
 pip install -e .
 
-cd IC3Net/ic3net-envs
+cd ic3net-envs
 python setup.py develop
 pip install tensorboardX
 
 ```
+Then, install gym-dragon which contains the implementation of the Urban Search and Rescue (USAR) environment.
 
-Next, we need to install dependencies for IC3Net including PyTorch. For doing that run:
+```
+cd gym-dragon
+pip install -e .
+```
+
+Finally, we need to install dependencies including PyTorch. For doing that run:
 
 ```
 pip install -r requirements.txt
 ```
-## Running
+## Train baseline comm-MARL agents
 
-Once everything is installed, we can run the using these example commands
+Once everything is installed, we can train MARL-comm agents using these example commands
 
 Note: We performed our experiments on `nprocesses` set to 1, you can change it according to your machine, but the plots may vary.
 
@@ -46,14 +52,61 @@ python main.py --env_name mini_dragon --exp_name no_comm --nagents 3 --hid_size 
 
 ### Predator-Prey
 
-- IC3Net on easy version
+- IC3Net on predadator prey (vision = 0)
 
 ```
-python main.py --env_name predator_prey --nagents 3 --nprocesses 16 --num_epochs 2000 --hid_size 128 --detach_gap 10 --lrate 0.001 --dim 5 --max_steps 20 --ic3net --vision 0 --recurrent
+python main.py --env_name predator_prey --nagents 3 --nprocesses 1 --num_epochs 2000 --hid_size 128 --detach_gap 10 --lrate 0.001 --dim 5 --max_steps 20 --ic3net --vision 0 --recurrent
 ```
 
-- CommNet on easy version
+- CommNet on predadator prey (vision = 0)
 
 ```
-python main.py --env_name predator_prey --nagents 3 --nprocesses 16 --num_epochs 2000 --hid_size 128 --detach_gap 10 --lrate 0.001 --dim 5 --max_steps 20 --commnet --vision 0 --recurrent
+python main.py --env_name predator_prey --nagents 3 --nprocesses 1 --num_epochs 2000 --hid_size 128 --detach_gap 10 --lrate 0.001 --dim 5 --max_steps 20 --commnet --vision 0 --recurrent
+```
+
+## Train LangGround agents
+
+### Collect offline dataset from LLM agents
+
+To train LangGround agents using the pipeline proposed in the paper, you will need to first collect the offline communication dataset from LLM agents.
+
+Navigate to the LLM directory and install dependencies for LLM agents including openai API package.
+
+```
+cd LLM
+pip install -r requirements.txt
+```
+
+Then set up the openai API key in your system environment variables as instructed in this [guideline](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety).
+
+```
+echo "export OPENAI_API_KEY='yourkey'" >> ~/.bash_profile
+source ~/.bash_profile
+echo $OPENAI_API_KEY
+```
+
+Once everything is ready, we can run the LLM agent simulation using these example commands:
+
+- 3 GPT-4-turbo agents on pp_v0 with communication
+```
+python pp_exp.py --model gpt-4-turbo-preview --exp_name gpt-4 --allow_comm --dim 5 --vision 0 
+```
+- 3 GPT-4-turbo agents on pp_v0 without communication
+```
+python pp_exp.py --model gpt-4-turbo-preview --exp_name gpt-4 --dim 5 --vision 0 
+```
+
+Note the above commands only collect team trajactory for one episode. To collect and process data in batchm run:
+
+```
+python offline_data_collection.py
+python offline_data_process.py
+```
+### Train LangGround agents
+
+To train LangGround agents with customized configuratons, we recommend use the example shell scripts to call the main training function.
+
+```
+cd ic3net-env/scripts
+python train_supervised.py
 ```

@@ -1,5 +1,7 @@
 # LangGround
 
+This repository contains reference implementation for LangGround paper (accepted to NeurIPS 2024), **Language Grounded Multi-agent Reinforcement Learning with Human-interpretable Communication**, available at [https://arxiv.org/abs/2409.17348](https://arxiv.org/abs/2409.17348)
+
 ## Installation
 
 First, clone the repo and install ic3net-envs which contains implementation for Predator-Prey and Traffic-Junction
@@ -52,7 +54,7 @@ python main.py --env_name mini_dragon --exp_name no_comm --nagents 3 --hid_size 
 
 ### Predator-Prey
 
-- IC3Net on predadator prey (vision = 0)
+- IC3Net on predator prey (vision = 0)
 
 ```
 python main.py --env_name predator_prey --nagents 3 --nprocesses 1 --num_epochs 2000 --hid_size 128 --detach_gap 10 --lrate 0.001 --dim 5 --max_steps 20 --ic3net --vision 0 --recurrent
@@ -104,9 +106,38 @@ python offline_data_process.py
 ```
 ### Train LangGround agents
 
-To train LangGround agents with customized configuratons, we recommend use the example shell scripts to call the main training function.
+To train LangGround agents with customized configurations, we recommend use the example shell scripts to call the main training function.
 
 ```
 cd ic3net-env/scripts
 python train_supervised.py
 ```
+
+## Contacts
+
+Please contact Huao Li ([@romanlee6](https://github.com/romanlee6)) for any questions about this repo.
+
+## Acknowledgements
+
+### LangGround authors
+- Huao Li
+- Hossein Nourkhiz Mahjoub
+- Behdad Chalaki
+- Vaishnav Tadiparthi
+- Kwonjoon Lee
+- Ehsan Moradi-Pari
+- Michael Lewis
+- Katia Sycara
+
+### Prototype Communication authors
+- Mycal Tucker
+- Seth Karten
+- Siva Kailas
+
+### Gym-Dragon authors
+- Ini Oguntola
+- 
+### IC3Net authors
+- Amanpreet Singh
+- Tushar Jain
+- Sainbayar Sukhbaatar

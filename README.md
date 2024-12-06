@@ -136,7 +136,7 @@ Please contact Huao Li ([@romanlee6](https://github.com/romanlee6)) for any ques
 
 ### Gym-Dragon authors
 - Ini Oguntola
-- 
+
 ### IC3Net authors
 - Amanpreet Singh
 - Tushar Jain

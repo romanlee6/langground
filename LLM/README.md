@@ -30,11 +30,11 @@ Once everything is installed, we can run the using these example commands
 ### Urban Search and Rescue (i.e. gym_dragon)
 - GPT-4-turbo on mini_dragon with 5 nodes
 ```
-python comm_exp.py --model gpt-4-turbo-preview --exp_name gpt-4 --allow_comm --belief 
+python dragon_exp.py --model gpt-4-turbo-preview --exp_name gpt-4 --allow_comm --belief 
 ```
 - GPT-4-turbo w/o communication on mini_dragon with 5 nodes
 ```
-python comm_exp.py --model gpt-4-turbo-preview --exp_name gpt-4 --belief 
+python dragon_exp.py --model gpt-4-turbo-preview --exp_name gpt-4 --belief 
 ```
 
 
